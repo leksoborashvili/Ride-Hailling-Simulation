@@ -14,28 +14,29 @@ public class Customer
     private int expectedTravelTime;
     private int timeOrdered;
     private int timePickedUp;
-    private int waitTime;
-    private int rideTime;
+    private static int objCounter;
     /**
      * Constructor adds the custoemer on the random node of the graph.
      * @param graph the given graph
      * @param id ID of the customer
      * @param bfs max dropoff distance from the spawn point
      */
-    public Customer(Graph graph,int id,int bfs)
+    public Customer(Graph graph,int time,int bfs)
     {
-        ID=id;
+        ID          = objCounter;
+        objCounter  ++;
         Random rand = new Random();
-        pickup = rand.nextInt(graph.getNodes());
-        bfs = 1 + rand.nextInt(bfs);
-        int k=0;
-        dropoff=-1;
+        pickup      = rand.nextInt(graph.getNodes());
+        bfs         = 1 + rand.nextInt(bfs);
+        int k       = 0;
+        timeOrdered = time;
+        dropoff     = -1;
         while(dropoff==-1 && k<10){
             dropoff = graph.dropLocation(pickup,bfs);
             k++;
+            bfs--;
         }
-        waitTime=0;
-        rideTime=0;
+
         if(dropoff == -1) dropoff = graph.dropLocation(pickup,1);
     }
     /**
@@ -61,6 +62,22 @@ public class Customer
     public int getDropoff()
     {
         return dropoff;
+    }
+    /**
+     * sets time ordered
+     * @param or time ordered
+     */
+    public void setTimeOrdered(int or)
+    {
+        timeOrdered = or;
+    }
+    /**
+     * returns timeOrdered
+     * @return time ordered
+     */
+    public int getTimeOrdered()
+    {
+        return timeOrdered;
     }
     /**
      * sets the expected travel time
@@ -95,35 +112,18 @@ public class Customer
         return timePickedUp;
     }
     /**
-     * returns the wait time 
-     * @return wait time
+     * returns number of customers
+     * @return number of customers
      */
-    public int getWaitTime()
+    public static int getNumberofCustomer()
     {
-        return waitTime;
+        return objCounter;
     }
     /**
-     * sets the wait time
-     * @param w wait time
+     * resets static values
      */
-    public void setWaitTime(int w)
+    public static void reset()
     {
-        waitTime = w;
-    }
-    /**
-     * returns ride time
-     * @reutnr ride time
-     */
-    public int getRideTime()
-    {
-        return rideTime;
-    }
-    /**
-     * sets the ride time
-     * @param r the ride time
-     */
-    public void setRideTime(int r)
-    {
-        rideTime=r;
+        objCounter = 0;
     }
 }

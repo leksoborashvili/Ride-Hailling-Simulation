@@ -35,18 +35,18 @@ public class Edge
      */
     public Edge(int n1,int n2,String t)
     {
-        node1=n1;
-        node2=n2;
-        type=t;
-        Random rand = new Random();
-        normalWeight = 5 + rand.nextInt(10);
-        freeWeight = normalWeight - rand.nextInt(4);
-        busyWeight = normalWeight + rand.nextInt(4);
+        node1        = n1;
+        node2        = n2;
+        type         = t;
+        Random rand  = new Random();
+        normalWeight = 2 + rand.nextInt(3);
+        freeWeight   = normalWeight - rand.nextInt(2);
+        busyWeight   = normalWeight + rand.nextInt(2);
         if(t=="highway") 
         {
-            normalWeight*=2;
-            freeWeight*=2;
-            busyWeight*=2;
+            normalWeight *= 2;
+            freeWeight   *= 2;
+            busyWeight   *= 2;
         }
         randomBusyness();
     }
@@ -57,7 +57,7 @@ public class Edge
     public void randomBusyness()
     {
         Random rand = new Random();
-        int k=rand.nextInt(4);
+        int k       = rand.nextInt(4);
         if(k==0) curWeight = freeWeight;
         else 
         if(k==1 || k==2) curWeight = normalWeight;

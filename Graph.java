@@ -61,13 +61,14 @@ public class Graph
         if(list1.contains(node2)) return false;
         if(node1==node2) return false;
         //if one of these nodes have more than 5 edges then they cannot be connected
-        if(list1.size()>=5 || list2.size()>=5) return false;
+        
         list1.add(node2);
         list2.add(node1);
         Edge edge = new Edge(node1,node2,type);
         edges.add(edge);
         listAdj.replace(node1,list1);
         listAdj.replace(node2,list2);
+        
         return true;
     }
     /**
@@ -84,7 +85,7 @@ public class Graph
             for(int j=0;j<5;j++) 
             {
                 int neighborNode = rand.nextInt(nodes);
-                int dNumber = rand.nextInt(30);
+                int dNumber      = rand.nextInt(100);
                 //dNumber is the random number from 1 to 30 that is compared to density to see if the nodes are connected
                 if(dNumber<density) connect(i,neighborNode,"regular");
                 list = listAdj.get(i);
@@ -97,16 +98,16 @@ public class Graph
         for(int i=0;i<nodes;i++)
         {
             TreeSet<Integer> set = new TreeSet<Integer>();
-            set.add(i);
+            set .add(i);
             sets.add(set);
         }
         int j=0;
-        //this is kruskal algorithm
+        //this is kruskal algorithm to ensure the connectivity of the graph
         while(j<edges.size() && sets.size()>1)
         {
             Edge edge = edges.get(j);
-            int loc1 = -1;
-            int loc2 = -1;
+            int loc1  = -1;
+            int loc2  = -1;
             
             for(int i=0;i<sets.size();i++)
             {
@@ -147,21 +148,21 @@ public class Graph
     {
         if(nodeA>=nodes || nodeB>=nodes) return -1;
         PriorityQueue<Djk> q = new PriorityQueue<Djk>();
-        Djk[] ans = new Djk[nodes];
+        Djk[] ans            = new Djk[nodes];
         for(int i=0;i<nodes;i++)
         {
-            Djk djk1 = new Djk();
-            djk1.node=i;
+            Djk djk1  = new Djk();
+            djk1.node = i;
             djk1.prev = -1;
-            djk1.dist=999999;
-            ans[i]=djk1;
+            djk1.dist = 999999;
+            ans[i]    = djk1;
             q.offer(djk1);
         }
-        Djk djk = new Djk();
-        djk.node = nodeA;
-        djk.prev = -1;
-        djk.dist=0;
-        ans[nodeA]=djk;
+        Djk djk    = new Djk();
+        djk.node   = nodeA;
+        djk.prev   = -1;
+        djk.dist   = 0;
+        ans[nodeA] = djk;
         q.offer(djk);
         
         while(q.size()>0)
@@ -179,8 +180,8 @@ public class Graph
                 
                 if(altDistance >= ans[dest].dist) continue;
                 
-                ans[dest].dist=altDistance;
-                ans[dest].prev=d.node;
+                ans[dest].dist = altDistance;
+                ans[dest].prev = d.node;
                 q.offer(ans[dest]);
                 
             }
@@ -197,21 +198,21 @@ public class Graph
     {
         if(nodeA>=nodes) return null;
         PriorityQueue<Djk> q = new PriorityQueue<Djk>();
-        Djk[] ans = new Djk[nodes];
+        Djk[] ans            = new Djk[nodes];
         for(int i=0;i<nodes;i++)
         {
-            Djk djk1 = new Djk();
-            djk1.node=i;
+            Djk djk1  = new Djk();
+            djk1.node = i;
             djk1.prev = -1;
-            djk1.dist=999999;
-            ans[i]=djk1;
+            djk1.dist = 999999;
+            ans[i]    = djk1;
             q.offer(djk1);
         }
-        Djk djk = new Djk();
-        djk.node = nodeA;
-        djk.prev = -1;
-        djk.dist=0;
-        ans[nodeA]=djk;
+        Djk djk    = new Djk();
+        djk.node   = nodeA;
+        djk.prev   = -1;
+        djk.dist   = 0;
+        ans[nodeA] = djk;
         q.offer(djk);
         
         while(q.size()>0)
@@ -229,8 +230,8 @@ public class Graph
                 
                 if(altDistance >= ans[dest].dist) continue;
                 
-                ans[dest].dist=altDistance;
-                ans[dest].prev=d.node;
+                ans[dest].dist = altDistance;
+                ans[dest].prev = d.node;
                 q.offer(ans[dest]);
                 
             }
@@ -253,26 +254,26 @@ public class Graph
     {
         if(nodeA>=nodes || nodeB>=nodes) return null;
         PriorityQueue<Djk> q = new PriorityQueue<Djk>();
-        Djk[] ans = new Djk[nodes];
+        Djk[] ans            = new Djk[nodes];
         for(int i=0;i<nodes;i++)
         {
-            Djk djk1 = new Djk();
-            djk1.node=i;
+            Djk djk1  = new Djk();
+            djk1.node = i;
             djk1.prev = -1;
-            djk1.dist=999999;
-            ans[i]=djk1;
+            djk1.dist = 999999;
+            ans[i]    = djk1;
             q.offer(djk1);
         }
-        Djk djk = new Djk();
-        djk.node = nodeA;
-        djk.prev = -1;
-        djk.dist=0;
-        ans[nodeA]=djk;
+        Djk djk    = new Djk();
+        djk.node   = nodeA;
+        djk.prev   = -1;
+        djk.dist   = 0;
+        ans[nodeA] = djk;
         q.offer(djk);
         
         while(q.size()>0)
         {
-            Djk d = q.poll();
+            Djk d          = q.poll();
             ArrayList list = listAdj.get(d.node);
             for(int i=0;i<list.size();i++)
             {
@@ -285,8 +286,8 @@ public class Graph
                 
                 if(altDistance >= ans[dest].dist) continue;
                 
-                ans[dest].dist=altDistance;
-                ans[dest].prev=d.node;
+                ans[dest].dist = altDistance;
+                ans[dest].prev = d.node;
                 q.offer(ans[dest]);
                 
             }
@@ -365,8 +366,9 @@ public class Graph
     public int generateNeighborForFreeMove(int node)
     {
         ArrayList<Integer> list = listAdj.get(node);
-        Random rand = new Random();
-        int d = list.get(rand.nextInt(list.size()));
+        Random rand             = new Random();
+        
+        int d                   = list.get(rand.nextInt(list.size()));
         return d;
         
     }
@@ -377,21 +379,21 @@ public class Graph
      */
     public int dropLocation(int start, int bfs)
     {
-        ArrayDeque<Djk> q = new ArrayDeque<Djk>();
+        ArrayDeque<Djk> q    = new ArrayDeque<Djk>();
         ArrayList<Integer> l = new ArrayList<Integer>();
         //keeps track of visited nodes
-        int visited[] = new int[nodes];
+        int visited[]        = new int[nodes];
         
         for(int i=0;i<visited.length;i++)
         {
             visited[i]=0;
         }
         
-        Djk djk = new Djk();
-        djk.node=start;
+        Djk djk  = new Djk();
+        djk.node = start;
         djk.dist = 0;
         q.addLast(djk);
-        visited[start]= 1;
+        visited[start] = 1;
         
         
         
@@ -408,7 +410,7 @@ public class Graph
                 {
                     visited[list.get(i)] = 1;
                     
-                    Djk newD = new Djk();
+                    Djk newD  = new Djk();
                     newD.node = list.get(i);
                     newD.dist = d.dist+1;
                     q.addLast(newD); 
@@ -454,6 +456,16 @@ public class Graph
         {
             System.out.println(edges.get(i).getNode1() + " " + edges.get(i).getNode2() + " " + 
                 edges.get(i).getType() + " " + edges.get(i).getCurWeight());
+        }
+    }
+    /**
+     * randomizes edge weights
+     */
+    public void randomizeEdgeWeights()
+    {
+        for(int i=0;i<edges.size();i++)
+        {
+            edges.get(i).randomBusyness();
         }
     }
 }
